@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="{{ url_for('static', filename='js/core.js') }}"></script>
+		<script>
+			var selfshark;
+			$(document).ready(function() {
+				selfshark = new Selfshark();
+			});
+		</script>
+		<!--
+			<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
+			<link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}" />
+			<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" />
+		-->
+	</head>
+	<body>
+		<header>
+			<h1><img src="{{ url_for('static', filename='img/logo.png') }}" alt="" style="height:250px;" /></h1>
+			<form onsubmit="selfshark.search(); return false;">
+				<input type="text" placeholder="Search query …" id="searchq" />
+			</form>
+		</header>
+		<article>
+			<h2>Search results:</h2>
+			<ul id="songlist">
+			</ul>
+			<h2>Playlist:</h2>
+			<a href="javascript:selfshark.clearPlaylist();">Wipe…</a>
+			<ul id="playlist">
+			</ul>
+			<audio id="player" controls="controls"></audio>
+		</article>
+	</body>
+</html>
