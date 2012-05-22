@@ -3,6 +3,22 @@ var Selfshark = (function (jQuery) {
 	var $ = jQuery.sub();
 
 	function selfshark() {
+		var next,
+			shark = this,
+			player = $("#player");
+
+
+		// player event handlers
+		player.bind('ended', function() {
+			// check if there is a next song
+			next = $("ul#playlist #pl_" + player.data("id")).next();
+			if(next) {
+				// get+play it
+				$.getJSON('/api/get/id?id=' + next.attr("id").replace("pl_", ""), function(val) {
+					shark.play(val["file"]);
+				});
+			}
+		});
 	}
 
 	(function (fn) {
@@ -38,6 +54,7 @@ var Selfshark = (function (jQuery) {
 		fn.play = function (path) {
 			var player = $("#player").get(0);
 			player.src = path;
+			$("#player").data("id", $.sha1(path));
 			player.play();
 		};
 	}(selfshark.prototype));
