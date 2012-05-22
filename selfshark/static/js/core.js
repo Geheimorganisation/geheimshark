@@ -7,6 +7,8 @@ var Selfshark = (function (jQuery) {
 			shark = this,
 			player = $("#player");
 
+		// sortable playlist
+		$("#playlist").sortable();
 
 		// player event handlers
 		player.bind('ended', function() {
